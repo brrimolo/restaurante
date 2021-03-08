@@ -5,7 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import br.com.restaurante.restaurante.enums.TipoRefeicao;
+import br.com.restaurante.restaurante.enums.TipoItem;
 
 @Entity
 public class Item {
@@ -14,7 +14,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    private TipoRefeicao tipoRefeicao;
+    private TipoItem tipoItem;
     private Double valor;
 
     //#region *** Getters and Setters ***
@@ -34,12 +34,12 @@ public class Item {
         this.nome = nome;
     }
 
-    public TipoRefeicao getTipoRefeicao() {
-        return tipoRefeicao;
+    public TipoItem getTipoRefeicao() {
+        return tipoItem;
     }
 
-    public void setTipoRefeicao(TipoRefeicao tipoRefeicao) {
-        this.tipoRefeicao = tipoRefeicao;
+    public void setTipoRefeicao(TipoItem tipoItem) {
+        this.tipoItem = tipoItem;
     }
 
     public Double getValor() {
