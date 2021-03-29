@@ -11,3 +11,38 @@ content-type: application/json
 
     //alterar os campos aqui
 }
+
+
+
+//---------------------------------------------
+
+
+###
+GET http://localhost:8080/bairro// HTTP/1.1
+
+###
+
+POST http://localhost:8080/bairro/incluir/ HTTP/1.1
+content-type: application/json
+
+{
+    "nome": "Barredo",
+    "valorFrete": "1.50"
+
+    //alterar os campos aqui
+}
+
+###
+GET http://localhost:8080/bairro/5 HTTP/1.1
+
+
+###
+PUT  http://localhost:8080/bairro/alterar/6 HTTP/1.1
+content-type: application/json
+
+{
+    "nome": "Sao Jose Do Barreto",
+    "valorFrete": "11.50"
+
+    //alterar os campos aqui
+}
