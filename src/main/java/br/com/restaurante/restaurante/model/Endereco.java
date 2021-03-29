@@ -1,6 +1,9 @@
 package br.com.restaurante.restaurante.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import br.com.restaurante.restaurante.enums.TipoUf;
@@ -8,6 +11,9 @@ import br.com.restaurante.restaurante.enums.TipoUf;
 @Entity
 public class Endereco {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String logradouro;
     private String numero;
     private String complemento;
