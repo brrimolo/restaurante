@@ -3,6 +3,7 @@ package br.com.restaurante.restaurante.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,16 +24,20 @@ public class ItemController {
         this.itemRepository=itemRepository;
     }
 
+    @CrossOrigin
     @GetMapping("/")
     public List<Item> getItens(){
         return itemRepository.findAll();
     }
 
+    @CrossOrigin
     @PostMapping("/incluir")
     public void incluirItem(@RequestBody Item item){
+        
         itemRepository.save(item);
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public void excluirItem(@PathVariable("id") Long id) throws Exception{
         var x = itemRepository.findById(id);
@@ -46,13 +51,16 @@ public class ItemController {
     }
 
 
+    @CrossOrigin
     @PutMapping("/alterar/{id}")
     public ResponseEntity<String> alterarItem(@PathVariable("id") Long id,@RequestBody Item item){
         itemRepository.findById(id)
         .map(x -> {
             x.setNome(item.getNome());
-            x.setTipoRefeicao(item.getTipoRefeicao());
+            x.setTipoItem(item.getTipoItem());
             x.setValor(item.getValor());
+            x.setQtdRefeicao(item.getQtdRefeicao());
+            x.setTempoPreparo(item.getTempoPreparo());
             Item itemAtualizado = itemRepository.save(x);
             return ResponseEntity.ok().body(itemAtualizado);
         }).orElse(ResponseEntity.notFound().build());

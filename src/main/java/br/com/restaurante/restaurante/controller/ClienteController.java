@@ -2,8 +2,11 @@ package br.com.restaurante.restaurante.controller;
 
 import java.util.List;
 
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.NotFoundException;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +14,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import br.com.restaurante.restaurante.repository.ClienteRepository;
 import br.com.restaurante.restaurante.model.Cliente;
 
@@ -25,33 +27,43 @@ public class ClienteController {
         this.clienteRepo = clienteRepo;
     }
     
+    @CrossOrigin
     @GetMapping("/")
     public List<Cliente> getClientes() {
         return clienteRepo.findAll();
     }
-    @GetMapping("/{cpf}")
-    public Cliente getClientePorCpf(@PathVariable("cpf") String cpf){
+
+    @CrossOrigin
+    @GetMapping("/login")
+    public Cliente getClientePorEmail(@RequestBody Cliente clienteLogin){
         var clientes = clienteRepo.findAll();
         Cliente cliente = new Cliente();
         for (Cliente client : clientes) {
-            if(client.getCpf().equals(cpf)){
-                cliente.setCpf(cpf);
-                cliente.setEmail(client.getEmail());
-                cliente.setId(client.getId());
-                cliente.setEndereco(client.getEndereco());
-                client.setNome(client.getNome());
-                client.setTelefone(client.getTelefone());
-
+            if(client.getEmail().toLowerCase().equals(clienteLogin.getEmail().toLowerCase())){
+                if(client.getSenha().equals(clienteLogin.getSenha())){
+                    cliente.setCpf(client.getCpf());
+                    cliente.setEmail(clienteLogin.getEmail());
+                    cliente.setId(client.getId());
+                    cliente.setEndereco(client.getEndereco());
+                    client.setNome(client.getNome());
+                    cliente.setSenha(client.getSenha());
+                }else{
+                    throw new BadRequestException("Senha inválida.");
+                }
+            }else{
+                throw new NotFoundException("Email não cadastrado.");
             }
         }
         return cliente;
     }
 
+    @CrossOrigin
     @PostMapping("/incluir")
     public void incluirCliente(@RequestBody Cliente cliente) {
         clienteRepo.save(cliente);
     }
 
+    @CrossOrigin
     @PutMapping("/alterar/{id}")
     public ResponseEntity<String> alterarCliente(@PathVariable("id") Long id,@RequestBody Cliente cliente){
         clienteRepo.findById(id)
@@ -67,6 +79,7 @@ public class ClienteController {
         return null;
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public void excluirCliente(@PathVariable("id") Long id) throws Exception{
         var x = clienteRepo.findById(id);
@@ -78,4 +91,6 @@ public class ClienteController {
             throw new Exception("Cliente não encontrado.");
         }
     }
+
+
 }

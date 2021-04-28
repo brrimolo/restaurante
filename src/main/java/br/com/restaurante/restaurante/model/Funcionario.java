@@ -25,7 +25,6 @@ public class Funcionario {
     private Endereco endereco;
     private String email;
 
-    
     @OneToMany
     private List<Telefone> telefone;
 

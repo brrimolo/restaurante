@@ -2,21 +2,21 @@ package br.com.restaurante.restaurante.enums;
 
 public enum TipoItem {
     
-    Entrada("Entrada"),
-    PratoPrincipal("Prato principal"),
-    Sobremesa("Sobremesa"),
-    NaoAlcoolica("Bebida não alcoólica"),
-    Alcoolica("Bebida alcoólica");
+    Entrada(1),
+    PratoPrincipal(2),
+    Sobremesa(3),
+    NaoAlcoolica(4),
+    Alcoolica(5);
     
-    private String tipo;
+    public int tipo;
 
     // Método construtor
-    TipoItem(String tipo) {
+    TipoItem(int tipo) {
         this.tipo = tipo;
     }
-    
-    public String getNome() {
+
+
+    public int getItem(){
         return this.tipo;
     }
-
 }

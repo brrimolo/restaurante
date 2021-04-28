@@ -1,13 +1,16 @@
-GET http://localhost:8080/cliente/ HTTP/1.1
+GET http://localhost:8080/item/ HTTP/1.1
 
 ###
 
-POST http://localhost:8080/cliente/ HTTP/1.1
+POST http://localhost:8080/item/incluir HTTP/1.1
 content-type: application/json
 
 {
-    "name": "sample",
-    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+    "nome": "CocaCola",
+    "tipoItem": 0,
+    "valor": 6.5,
+    "qtdRefeicao": 8,
+    "tempoPreparo": 2.9
 
     //alterar os campos aqui
 }
@@ -15,7 +18,18 @@ content-type: application/json
 
 
 //---------------------------------------------
+###
 
+GET http://localhost:8080/cliente/ HTTP/1.1
+
+{
+    "nome": "Jose Erik",
+    "email": "Jose@mgail.com",
+    "senha": "123",
+    "telefone": ["232323994"]
+
+    //alterar os campos aqui
+}
 
 ###
 GET http://localhost:8080/bairro// HTTP/1.1
