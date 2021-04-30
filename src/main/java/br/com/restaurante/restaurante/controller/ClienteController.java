@@ -2,8 +2,6 @@ package br.com.restaurante.restaurante.controller;
 
 import java.util.List;
 
-import javax.ws.rs.BadRequestException;
-import javax.ws.rs.NotFoundException;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.restaurante.restaurante.repository.ClienteRepository;
 import br.com.restaurante.restaurante.model.Cliente;
+import br.com.restaurante.restaurante.model.InputModel.IMClienteLogin;
 
 @RestController
 @RequestMapping("/cliente")
@@ -34,27 +33,19 @@ public class ClienteController {
     }
 
     @CrossOrigin
-    @GetMapping("/login")
-    public Cliente getClientePorEmail(@RequestBody Cliente clienteLogin){
+    @PostMapping("/login")
+    public Cliente getClientePorEmail(@RequestBody IMClienteLogin clienteLogin){
         var clientes = clienteRepo.findAll();
-        Cliente cliente = new Cliente();
-        for (Cliente client : clientes) {
-            if(client.getEmail().toLowerCase().equals(clienteLogin.getEmail().toLowerCase())){
-                if(client.getSenha().equals(clienteLogin.getSenha())){
-                    cliente.setCpf(client.getCpf());
-                    cliente.setEmail(clienteLogin.getEmail());
-                    cliente.setId(client.getId());
-                    cliente.setEndereco(client.getEndereco());
-                    client.setNome(client.getNome());
-                    cliente.setSenha(client.getSenha());
-                }else{
-                    throw new BadRequestException("Senha inválida.");
-                }
-            }else{
-                throw new NotFoundException("Email não cadastrado.");
+        Cliente cli = new Cliente();
+        for (Cliente c : clientes) {
+            if(clienteLogin.getEmail().equalsIgnoreCase(c.getEmail())){
+                cli = c;
+                return cli;
+                
             }
         }
-        return cliente;
+        return cli;
+
     }
 
     @CrossOrigin

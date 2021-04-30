@@ -17,19 +17,24 @@ content-type: application/json
 
 
 
-//---------------------------------------------
+//------------CLIENTES----------------------
 ###
+
 
 GET http://localhost:8080/cliente/ HTTP/1.1
 
-{
-    "nome": "Jose Erik",
-    "email": "Jose@mgail.com",
-    "senha": "123",
-    "telefone": ["232323994"]
+###
+POST http://localhost:8080/cliente/login HTTP/1.1
+content-type: application/json
 
-    //alterar os campos aqui
+{
+    "email": "1",
+    "senha": "1hhhhhhh23"
 }
+
+
+//---------------------------------------------
+
 
 ###
 GET http://localhost:8080/bairro// HTTP/1.1
@@ -59,4 +64,34 @@ content-type: application/json
     "valorFrete": "11.50"
 
     //alterar os campos aqui
+}
+
+
+//----------------FUNCIONARIOS-------------------
+###
+
+GET http://localhost:8080/funcionario/ HTTP/1.1
+
+###
+POST http://localhost:8080/funcionario/incluir HTTP/1.1
+content-type: application/json
+
+{
+    "nome": "Carlos",
+    "cargo": "Garçom",
+    "login": "carlos",
+    "senha": "carlos123",
+    "gerente": "false",
+    "cpf": "222222222",
+    "email": "carlos@restauranteds1.com.br"
+
+}
+
+###
+GET http://localhost:8080/funcionario/login HTTP/1.1
+content-type: application/json
+
+{
+    "login": "carlos",
+    "senha": "carlos123"
 }

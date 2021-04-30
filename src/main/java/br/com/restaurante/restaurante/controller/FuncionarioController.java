@@ -70,22 +70,20 @@ public class FuncionarioController {
 
     
     @CrossOrigin
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody IMFuncionarioLogin flogin){
+    @GetMapping("/login")
+    public Funcionario login(@RequestBody IMFuncionarioLogin flogin){
         var funcionarios = funcionarioRepository.findAll();
-        for (Funcionario funcionario : funcionarios) {
-            if(funcionario.getEmail().toLowerCase().equals(flogin.getLogin().toLowerCase())){
-                if(funcionario.getSenha().equals(flogin.getSenha())){
-                    return ResponseEntity.ok().body("Tudo certo");
-                }else{
-                    return ResponseEntity.badRequest().body("Senha invalida");
+        Funcionario funcionario = new Funcionario();
+        for (Funcionario func : funcionarios) {
+            if(func.getLogin().toLowerCase().equals(flogin.getLogin().toLowerCase())){
+                if(func.getSenha().equals(flogin.getSenha())){
+                    funcionario=func;
+                    return funcionario;
                 }
-               
-
+                return null;
             }
         }
-        return ResponseEntity.notFound().build();
+        return null;
         
     }
-
 }
