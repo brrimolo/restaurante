@@ -3,6 +3,7 @@ package br.com.restaurante.restaurante.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,16 +24,19 @@ public class MesaController {
         this.mesaRepository=mesaRepository;
     }
 
+    @CrossOrigin
     @GetMapping("/")
     public List<Mesa> getMesas(){
         return mesaRepository.findAll();
     }
 
+    @CrossOrigin
     @PostMapping("/incluir")
     public void incluirMesa(@RequestBody Mesa mesa){
         mesaRepository.save(mesa);
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public void excluirMesa(@PathVariable("id") Long id) throws Exception{
         var x = mesaRepository.findById(id);
@@ -45,6 +49,7 @@ public class MesaController {
         }
     }
 
+    @CrossOrigin
     @PutMapping("/alterar/{id}")
     public ResponseEntity<String> alterarMesa(@PathVariable("id") Long id,@RequestBody Mesa mesa){
         mesaRepository.findById(id)
