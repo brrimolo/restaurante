@@ -1,10 +1,15 @@
 package br.com.restaurante.restaurante.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Pedido {
     
     @Id
@@ -14,6 +19,8 @@ public class Pedido {
     private LocalDate previsaoEntrega;
     private Boolean delivery;
     private Double valorTotal;
+    @OneToMany
+    private List<Item> itens;
 
     //#region *** Getters and Setters ***
     public Long getId() {
@@ -61,7 +68,12 @@ public class Pedido {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
+        result = prime * result + ((dataHoraPedido == null) ? 0 : dataHoraPedido.hashCode());
+        result = prime * result + ((delivery == null) ? 0 : delivery.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((itens == null) ? 0 : itens.hashCode());
+        result = prime * result + ((previsaoEntrega == null) ? 0 : previsaoEntrega.hashCode());
+        result = prime * result + ((valorTotal == null) ? 0 : valorTotal.hashCode());
         return result;
     }
 
@@ -74,12 +86,45 @@ public class Pedido {
         if (getClass() != obj.getClass())
             return false;
         Pedido other = (Pedido) obj;
+        if (dataHoraPedido == null) {
+            if (other.dataHoraPedido != null)
+                return false;
+        } else if (!dataHoraPedido.equals(other.dataHoraPedido))
+            return false;
+        if (delivery == null) {
+            if (other.delivery != null)
+                return false;
+        } else if (!delivery.equals(other.delivery))
+            return false;
         if (id == null) {
             if (other.id != null)
                 return false;
         } else if (!id.equals(other.id))
             return false;
+        if (itens == null) {
+            if (other.itens != null)
+                return false;
+        } else if (!itens.equals(other.itens))
+            return false;
+        if (previsaoEntrega == null) {
+            if (other.previsaoEntrega != null)
+                return false;
+        } else if (!previsaoEntrega.equals(other.previsaoEntrega))
+            return false;
+        if (valorTotal == null) {
+            if (other.valorTotal != null)
+                return false;
+        } else if (!valorTotal.equals(other.valorTotal))
+            return false;
         return true;
+    }
+
+    public List<Item> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<Item> itens) {
+        this.itens = itens;
     }
     
     

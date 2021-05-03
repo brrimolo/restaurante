@@ -1,0 +1,97 @@
+GET http://localhost:8080/item/ HTTP/1.1
+
+###
+
+POST http://localhost:8080/item/incluir HTTP/1.1
+content-type: application/json
+
+{
+    "nome": "CocaCola",
+    "tipoItem": 0,
+    "valor": 6.5,
+    "qtdRefeicao": 8,
+    "tempoPreparo": 2.9
+
+    //alterar os campos aqui
+}
+
+
+
+//------------CLIENTES----------------------
+###
+
+
+GET http://localhost:8080/cliente/ HTTP/1.1
+
+###
+POST http://localhost:8080/cliente/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "1",
+    "senha": "1hhhhhhh23"
+}
+
+
+//---------------------------------------------
+
+
+###
+GET http://localhost:8080/bairro// HTTP/1.1
+
+###
+
+POST http://localhost:8080/bairro/incluir/ HTTP/1.1
+content-type: application/json
+
+{
+    "nome": "Barredo",
+    "valorFrete": "1.50"
+
+    //alterar os campos aqui
+}
+
+###
+GET http://localhost:8080/bairro/5 HTTP/1.1
+
+
+###
+PUT  http://localhost:8080/bairro/alterar/6 HTTP/1.1
+content-type: application/json
+
+{
+    "nome": "Sao Jose Do Barreto",
+    "valorFrete": "11.50"
+
+    //alterar os campos aqui
+}
+
+
+//----------------FUNCIONARIOS-------------------
+###
+
+GET http://localhost:8080/funcionario/ HTTP/1.1
+
+###
+POST http://localhost:8080/funcionario/incluir HTTP/1.1
+content-type: application/json
+
+{
+    "nome": "Carlos",
+    "cargo": "Garçom",
+    "login": "carlos",
+    "senha": "carlos123",
+    "gerente": "false",
+    "cpf": "222222222",
+    "email": "carlos@restauranteds1.com.br"
+
+}
+
+###
+GET http://localhost:8080/funcionario/login HTTP/1.1
+content-type: application/json
+
+{
+    "login": "carlos",
+    "senha": "carlos123"
+}
