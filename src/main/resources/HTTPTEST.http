@@ -95,3 +95,18 @@ content-type: application/json
     "login": "carlos",
     "senha": "carlos123"
 }
+
+####
+
+
+POST http://localhost:8080/localhost:8080/localhost:8080/mesa/ HTTP/1.1
+content-type: application/json
+
+{
+    "qtdCadeira": "20",
+    "reservada": "true"
+
+}
+
+
+
