@@ -70,7 +70,7 @@ public class FuncionarioController {
 
     
     @CrossOrigin
-    @GetMapping("/login")
+    @PostMapping("/login")
     public Funcionario login(@RequestBody IMFuncionarioLogin flogin){
         var funcionarios = funcionarioRepository.findAll();
         Funcionario funcionario = new Funcionario();
@@ -80,10 +80,10 @@ public class FuncionarioController {
                     funcionario=func;
                     return funcionario;
                 }
-                return null;
+                
             }
         }
-        return null;
+        return funcionario;
         
     }
 }

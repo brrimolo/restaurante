@@ -39,8 +39,11 @@ public class ClienteController {
         Cliente cli = new Cliente();
         for (Cliente c : clientes) {
             if(clienteLogin.getEmail().equalsIgnoreCase(c.getEmail())){
-                cli = c;
-                return cli;
+                if(clienteLogin.getSenha().equals(c.getSenha())){
+                    cli = c;
+                    return cli;
+                }
+                
                 
             }
         }
