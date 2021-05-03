@@ -3,6 +3,7 @@ package br.com.restaurante.restaurante.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,17 +24,20 @@ public class ReservaController {
         this.reservaRepository=reservaRepository;
     }
 
+    @CrossOrigin
     @GetMapping("/")
     public List<Reserva> getReservas(){
         return reservaRepository.findAll();
     }
 
+    @CrossOrigin
     @PostMapping("/incluir")
     public void incluirReserva(@RequestBody Reserva reserva){
         reservaRepository.save(reserva);
     }
 
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public void excluirReserva(@PathVariable("id") Long id) throws Exception{
         var x = reservaRepository.findById(id);
@@ -46,6 +50,7 @@ public class ReservaController {
         }
     }
 
+    @CrossOrigin
     @PutMapping("/alterar/{id}")
     public ResponseEntity<String> alterarReserva(@PathVariable("id") Long id,@RequestBody Reserva reserva){
         reservaRepository.findById(id)

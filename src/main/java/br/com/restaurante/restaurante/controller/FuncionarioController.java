@@ -25,17 +25,21 @@ public class FuncionarioController {
         this.funcionarioRepository=funcionarioRepository;
     }
 
+    @CrossOrigin
     @GetMapping("/")
     public List<Funcionario> getFuncionarios(){
         return funcionarioRepository.findAll();
     }
 
+
+    @CrossOrigin
     @PostMapping("/incluir")
     public void incluirFuncionario(@RequestBody Funcionario funcionario){
         funcionarioRepository.saveAndFlush(funcionario);
     }
 
     
+    @CrossOrigin
     @GetMapping("/{id}")
     public void excluirFuncionario(@PathVariable("id") Long id) throws Exception{
         var x = funcionarioRepository.findById(id);
@@ -48,6 +52,7 @@ public class FuncionarioController {
         }
     }
 
+    @CrossOrigin
     @PutMapping("/alterar/{id}")
     public ResponseEntity<String> alterarFuncionario(@PathVariable("id") Long id,@RequestBody Funcionario func){
         funcionarioRepository.findById(id)
