@@ -24,12 +24,14 @@ content-type: application/json
 GET http://localhost:8080/cliente/ HTTP/1.1
 
 ###
-POST http://localhost:8080/cliente/login HTTP/1.1
+POST http://localhost:8080/cliente/incluir HTTP/1.1
 content-type: application/json
 
 {
-    "email": "1",
-    "senha": "1hhhhhhh23"
+    "email": "monique@gmail.com",
+    "senha": "monique",
+    "nome": "Monique",
+    "cpf": "22222222"
 }
 
 
@@ -88,26 +90,10 @@ content-type: application/json
 }
 
 ###
-GET http://localhost:8080/funcionario/login HTTP/1.1
+POST http://localhost:8080/funcionario/login HTTP/1.1
 content-type: application/json
 
 {
-    "login": "carlos",
-    "senha": "carlos123"
+    "login": "PEDRO",
+    "senha": "pedro123"
 }
-
-
-###
-POST http://localhost:8080/mesa/incluir HTTP/1.1
-content-type: application/json
-
-{
-    "qtdCadeiras": 6,
-    "reservada": true
-}
-
-
-###
-GET http://localhost:8080/mesa/ HTTP/1.1
-content-type: application/json
-
