@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### configuracoes banco local ###
+
+src/main/resources/application.properties
+node_modules/

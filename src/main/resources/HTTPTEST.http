@@ -95,3 +95,19 @@ content-type: application/json
     "login": "carlos",
     "senha": "carlos123"
 }
+
+
+###
+POST http://localhost:8080/mesa/incluir HTTP/1.1
+content-type: application/json
+
+{
+    "qtdCadeiras": 6,
+    "reservada": true
+}
+
+
+###
+GET http://localhost:8080/mesa/ HTTP/1.1
+content-type: application/json
+
