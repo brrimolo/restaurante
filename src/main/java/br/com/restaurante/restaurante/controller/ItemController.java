@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.restaurante.restaurante.enums.TipoItem;
 import br.com.restaurante.restaurante.model.Item;
 import br.com.restaurante.restaurante.repository.ItemRepository;
 
@@ -65,5 +66,14 @@ public class ItemController {
             return ResponseEntity.ok().body(itemAtualizado);
         }).orElse(ResponseEntity.notFound().build());
         return null;
+    }
+
+
+    @CrossOrigin
+    @GetMapping("/tipoitem")
+    public TipoItem[] getItemTipos(){
+        var x = TipoItem.values();
+        return x;
+
     }
 }
