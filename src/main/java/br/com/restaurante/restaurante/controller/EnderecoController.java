@@ -3,6 +3,7 @@ package br.com.restaurante.restaurante.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,16 +25,19 @@ public class EnderecoController {
     }
 
 
+    @CrossOrigin
     @GetMapping("/")
     public List<Endereco> getEndereco(){
         return enderecoRepository.findAll();
     }
 
+    @CrossOrigin
     @PostMapping("/incluir")
     public void incluirEndereco(@RequestBody Endereco endereco){
         enderecoRepository.save(endereco);
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public void excluirEndereco(@PathVariable("id") Long id) throws Exception{
         var x = enderecoRepository.findById(id);
@@ -46,6 +50,7 @@ public class EnderecoController {
         }
     }
 
+    @CrossOrigin
     @PutMapping("/alterar/{id}")
     public ResponseEntity<String> alterarEndereco(@PathVariable("id") Long id,@RequestBody Endereco endereco){
         enderecoRepository.findById(id)
