@@ -45,17 +45,24 @@ public class Item {
     }
     //#endregion
 
+
+
+    
+   
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-        result = prime * result + ((qtdRefeicao == null) ? 0 : qtdRefeicao.hashCode());
-        result = prime * result + ((tempoPreparo == null) ? 0 : tempoPreparo.hashCode());
-        result = prime * result + ((tipoItem == null) ? 0 : tipoItem.hashCode());
-        result = prime * result + ((valor == null) ? 0 : valor.hashCode());
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Item [id=" + id + ", nome=" + nome + ", qtdRefeicao=" + qtdRefeicao + ", tempoPreparo=" + tempoPreparo
+                + ", tipoItem=" + tipoItem + ", valor=" + valor + "]";
     }
 
     @Override
@@ -77,29 +84,7 @@ public class Item {
                 return false;
         } else if (!nome.equals(other.nome))
             return false;
-        if (qtdRefeicao == null) {
-            if (other.qtdRefeicao != null)
-                return false;
-        } else if (!qtdRefeicao.equals(other.qtdRefeicao))
-            return false;
-        if (tempoPreparo == null) {
-            if (other.tempoPreparo != null)
-                return false;
-        } else if (!tempoPreparo.equals(other.tempoPreparo))
-            return false;
-        if (tipoItem != other.tipoItem)
-            return false;
-        if (valor == null) {
-            if (other.valor != null)
-                return false;
-        } else if (!valor.equals(other.valor))
-            return false;
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return nome;
     }
 
     public TipoItem getTipoItem() {

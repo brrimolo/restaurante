@@ -43,12 +43,9 @@ public class ClienteController {
                     cli = c;
                     return cli;
                 }
-                
-                
             }
         }
         return cli;
-
     }
 
     @CrossOrigin
