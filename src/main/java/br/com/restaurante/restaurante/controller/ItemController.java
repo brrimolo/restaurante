@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,7 +58,7 @@ public class ItemController {
 
 
     @CrossOrigin
-    @PutMapping("/alterar/{id}")
+    @GetMapping("/alterar/{id}")
     public ResponseEntity<String> alterarItem(@PathVariable("id") Long id,@RequestBody Item item){
         itemRepository.findById(id)
         .map(x -> {
