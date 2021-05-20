@@ -34,13 +34,14 @@ public class FuncionarioController {
 
     @CrossOrigin
     @PostMapping("/incluir")
-    public void incluirFuncionario(@RequestBody Funcionario funcionario){
+    public Long incluirFuncionario(@RequestBody Funcionario funcionario){
         funcionarioRepository.saveAndFlush(funcionario);
+        return funcionario.getMatricula();
     }
 
     
     @CrossOrigin
-    @GetMapping("/{id}")
+    @PostMapping("/{id}")
     public void excluirFuncionario(@PathVariable("id") Long id) throws Exception{
         var x = funcionarioRepository.findById(id);
 
@@ -55,22 +56,14 @@ public class FuncionarioController {
     @CrossOrigin
     @PutMapping("/alterar/{id}")
     public ResponseEntity<String> alterarFuncionario(@PathVariable("id") Long id,@RequestBody Funcionario func){
-        funcionarioRepository.findById(id)
-        .map(x -> {
-            x.setCargo(func.getCargo());
-            x.setCpf(func.getCpf());
-            x.setEmail(func.getEmail());
-            x.setEndereco(func.getEndereco());
-            x.setGerente(func.getGerente());
-            x.setLogin(func.getLogin());
-            x.setSenha(func.getSenha());
-            x.setNome(func.getNome());
-            x.setTelefone(func.getTelefone());
-            x.setMatricula(func.getMatricula());
-            Funcionario funcatualizado = funcionarioRepository.save(x);
-            return ResponseEntity.ok().body(funcatualizado);
-        }).orElse(ResponseEntity.notFound().build());
-        return null;
+        var funcionario = funcionarioRepository.findById(id);
+        if(!funcionario.isPresent()){
+            return ResponseEntity.notFound().build();
+        }
+        funcionarioRepository.save(func);
+        return ResponseEntity.noContent().build();
+        
+
     }
 
     

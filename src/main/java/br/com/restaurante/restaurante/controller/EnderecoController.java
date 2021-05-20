@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.restaurante.restaurante.enums.TipoUf;
 import br.com.restaurante.restaurante.model.Endereco;
 import br.com.restaurante.restaurante.repository.EnderecoRepository;
 
@@ -33,8 +34,9 @@ public class EnderecoController {
 
     @CrossOrigin
     @PostMapping("/incluir")
-    public void incluirEndereco(@RequestBody Endereco endereco){
+    public Long incluirEndereco(@RequestBody Endereco endereco){
         enderecoRepository.save(endereco);
+        return endereco.getId();
     }
 
     @CrossOrigin
@@ -66,6 +68,14 @@ public class EnderecoController {
             return ResponseEntity.ok().body(endAtual);
         }).orElse(ResponseEntity.notFound().build());
         return null;
+    }
+
+
+    @CrossOrigin
+    @GetMapping("/tipouf")
+    public TipoUf[] getTipoUf(){
+        var x = TipoUf.values();
+        return x;
     }
 
 }

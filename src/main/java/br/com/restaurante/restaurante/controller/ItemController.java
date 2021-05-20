@@ -108,6 +108,33 @@ public class ItemController {
 
 
     @CrossOrigin
+    @GetMapping("/carrinho/remover/{id}")
+    public int carrinhoItensRemover(@PathVariable("id") Long id) throws Exception{
+        var item = itemRepository.findById(id);
+        if(item.isPresent()){
+            if(carrinho.containsKey(item.get())){
+                auxcarrinho = carrinho.get(item.get())-1;
+                carrinho.remove(item.get());
+                if(auxcarrinho<=0){
+                    return carrinho.size();
+                }else{
+                    carrinho.put(item.get(), auxcarrinho);
+                }
+                
+                return carrinho.size();
+
+            }else{
+                //carrinho.put(item.get(),1);
+                return carrinho.size();
+            }
+            
+        }else{
+            throw new Exception("Item não disponível.");
+        }
+    }
+
+
+    @CrossOrigin
     @GetMapping("/carrinho")
     public String[][] getCarrinho() {
         List<Item> itensdocarrinhoaux = carrinho.keySet().stream().collect(Collectors.toList());
@@ -126,6 +153,23 @@ public class ItemController {
 
         return itensdocarrinho;
 
+    }
+
+
+
+
+    @CrossOrigin
+    @GetMapping("/carrinho/valortotal")
+    public Double valorTotalCarrinho(){
+        Double valortotal=0.0;
+        List<Item> itensdocarrinhoaux = carrinho.keySet().stream().collect(Collectors.toList());
+        List<Integer> quantidade = carrinho.values().stream().collect(Collectors.toList());
+        int i=0;
+        for (Item item : itensdocarrinhoaux) {
+            valortotal=valortotal+item.getValor()*quantidade.get(i);
+            i++;        
+        }
+        return valortotal;
     }
 
     @CrossOrigin

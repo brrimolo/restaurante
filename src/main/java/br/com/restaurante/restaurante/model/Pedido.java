@@ -22,6 +22,8 @@ public class Pedido {
     @OneToMany
     private List<Item> itens;
 
+
+    
     //#region *** Getters and Setters ***
     public Long getId() {
         return id;

@@ -39,7 +39,7 @@ content-type: application/json
 
 
 ###
-GET http://localhost:8080/bairro// HTTP/1.1
+GET http://localhost:8080/bairro/ HTTP/1.1
 
 ###
 
@@ -54,16 +54,19 @@ content-type: application/json
 }
 
 ###
-GET http://localhost:8080/bairro/5 HTTP/1.1
+GET http://localhost:8080/endereco/ HTTP/1.1
 
 
 ###
-PUT  http://localhost:8080/bairro/alterar/6 HTTP/1.1
+POST  http://localhost:8080/endereco/incluir HTTP/1.1
 content-type: application/json
 
 {
-    "nome": "Sao Jose Do Barreto",
-    "valorFrete": "11.50"
+    "logradouro": "Rua dos Jessuitas",
+    "numero": "16",
+    "complemento": "Condominio Mar do Norte",
+    "cidade": "Macae",
+    "cep": "384834"
 
     //alterar os campos aqui
 }
@@ -79,14 +82,43 @@ POST http://localhost:8080/funcionario/incluir HTTP/1.1
 content-type: application/json
 
 {
-    "nome": "Carlos",
+    "nome": "Paulo Antonio",
     "cargo": "Garçom",
-    "login": "carlos",
-    "senha": "carlos123",
+    "login": "paulo",
+    "senha": "paulo123",
     "gerente": "false",
-    "cpf": "222222222",
-    "email": "carlos@restauranteds1.com.br"
+    "cpf": "3333333",
+    "email": "paulo@restauranteds1.com.br",
+    "endereco": {
+      "id": 1,
+      "logradouro": "Rua 123",
+      "numero": "98",
+      "complemento": "Travessa 18",
+      "bairro": {
+        "id": 1,
+        "nome": "Sao Jose Do Barreto",
+        "valorFrete": 11.5
+      },
+      "cidade": "Macaé",
+      "uf": "AC",
+      "cep": "2525536"
+    }
 
+}
+###
+PUT http://localhost:8080/funcionario/alterar/68 HTTP/1.1
+content-type: application/json
+
+{
+    "nome": "Andressa Soares",
+    "cargo": "Gerente de Atendimento",
+    "login": "andressa",
+    "senha": "andressa123",
+    "gerente": false,
+    "cpf": "12315125125",
+    "email": "andressa@ds1.com.br"
+
+    
 }
 
 ###
@@ -101,10 +133,31 @@ content-type: application/json
 
 ###
 
-GET http://localhost:8080/item/carrinho/add/2 HTTP/1.1
+GET http://localhost:8080/item/carrinho/valortotal HTTP/1.1
 
 ###
 
-GET http://localhost:8080/item/carrinho HTTP/1.1
+GET http://localhost:8080/item/carrinho/remover/5 HTTP/1.1
 
 ###
+
+
+
+//---------------------------ENDEREÇO--------------------------
+
+###
+
+GET http://localhost:8080/endereco/ HTTP/1.1
+
+###
+POST http://localhost:8080/endereco/incluir HTTP/1.1
+content-type: application/json
+
+{
+    "logradouro": "Rua 123",
+    "numero": "98",
+    "complemento": "Travessa 18",
+    "cidade": "Macaé",
+    "uf": "AC",
+    "cep": "2525536"
+}
