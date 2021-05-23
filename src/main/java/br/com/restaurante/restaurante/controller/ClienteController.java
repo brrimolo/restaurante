@@ -55,7 +55,7 @@ public class ClienteController {
     }
 
     @CrossOrigin
-    @PutMapping("/alterar/{id}")
+    @PostMapping("/alterar/{id}")
     public ResponseEntity<String> alterarCliente(@PathVariable("id") Long id,@RequestBody Cliente cliente){
         clienteRepo.findById(id)
         .map(x -> {
