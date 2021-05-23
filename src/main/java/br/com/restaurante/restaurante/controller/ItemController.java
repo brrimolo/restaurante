@@ -58,7 +58,7 @@ public class ItemController {
 
 
     @CrossOrigin
-    @GetMapping("/alterar/{id}")
+    @PostMapping("/alterar/{id}")
     public ResponseEntity<String> alterarItem(@PathVariable("id") Long id,@RequestBody Item item){
         itemRepository.findById(id)
         .map(x -> {
