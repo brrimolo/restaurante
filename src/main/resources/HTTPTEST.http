@@ -6,15 +6,34 @@ POST http://localhost:8080/item/incluir HTTP/1.1
 content-type: application/json
 
 {
-    "nome": "CocaCola",
+    "nome": "Guaraná",
     "tipoItem": 0,
-    "valor": 6.5,
-    "qtdRefeicao": 8,
-    "tempoPreparo": 2.9
+    "valor": 5.5,
+    "qtdRefeicao": 39,
+    "tempoPreparo": 1.0
 
     //alterar os campos aqui
 }
 
+###
+
+GET http://localhost:8080/item/1 HTTP/1.1
+
+
+###
+
+GET http://localhost:8080/item/alterar/38 HTTP/1.1
+content-type: application/json
+
+{
+    "nome": "Coca-Cola",
+    "tipoItem": 3,
+    "valor": 6.5,
+    "qtdRefeicao": 20,
+    "tempoPreparo": 1.0
+
+    //alterar os campos aqui
+}
 
 
 //------------CLIENTES----------------------
