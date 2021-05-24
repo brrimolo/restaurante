@@ -2,7 +2,6 @@ package br.com.restaurante.restaurante.controller;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -55,14 +54,23 @@ public class FuncionarioController {
 
     @CrossOrigin
     @PutMapping("/alterar/{id}")
-    public ResponseEntity<String> alterarFuncionario(@PathVariable("id") Long id,@RequestBody Funcionario func){
-        var funcionario = funcionarioRepository.findById(id);
-        if(!funcionario.isPresent()){
-            return ResponseEntity.notFound().build();
-        }
-        funcionarioRepository.save(func);
-        return ResponseEntity.noContent().build();
+    Funcionario alterarFuncionario(@PathVariable("id") Long id,@RequestBody Funcionario func){
         
+        return funcionarioRepository.findById(id).map(funcionario -> {
+            funcionario.setCargo(func.getCargo());
+            funcionario.setCpf(func.getCpf());
+            funcionario.setEmail(func.getEmail());
+            funcionario.setEndereco(func.getEndereco());
+            funcionario.setGerente(func.getGerente());
+            funcionario.setLogin(func.getLogin());
+            funcionario.setNome(func.getNome());
+            funcionario.setSenha(func.getSenha());
+            return funcionarioRepository.save(funcionario);
+        }).orElseGet(() -> {
+            func.setMatricula(id);
+            return funcionarioRepository.save(func);
+        });
+
 
     }
 

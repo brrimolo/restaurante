@@ -34,7 +34,7 @@ public class EnderecoController {
 
     @CrossOrigin
     @PostMapping("/incluir")
-    public Long incluirEndereco(@RequestBody Endereco endereco){
+    Long incluirEndereco(@RequestBody Endereco endereco){
         enderecoRepository.save(endereco);
         return endereco.getId();
     }

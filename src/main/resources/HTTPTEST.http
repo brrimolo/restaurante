@@ -62,11 +62,15 @@ POST  http://localhost:8080/endereco/incluir HTTP/1.1
 content-type: application/json
 
 {
-    "logradouro": "Rua dos Jessuitas",
+    "logradouro": "Rua dos Jessuitasdsdsdsdsds",
     "numero": "16",
     "complemento": "Condominio Mar do Norte",
     "cidade": "Macae",
-    "cep": "384834"
+    "cep": "384834",
+    "uf": "RJ",
+    "bairro": {
+        "id": "1"
+    }
 
     //alterar os campos aqui
 }
@@ -116,6 +120,20 @@ content-type: application/json
     "senha": "andressa123",
     "gerente": false,
     "cpf": "12315125125",
+    "endereco": {
+        "id": 1,
+        "logradouro": "Rua 123",
+        "numero": "98",
+        "complemento": "Travessa 18",
+        "bairro": {
+            "id": 1,
+            "nome": "Sao Jose Do Barreto",
+            "valorFrete": 11.5
+        },
+        "cidade": "Macaé",
+        "uf": "AC",
+        "cep": "2525536"
+    },
     "email": "andressa@ds1.com.br"
 
     
