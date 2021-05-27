@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.restaurante.restaurante.model.Funcionario;
+import br.com.restaurante.restaurante.model.Telefone;
 import br.com.restaurante.restaurante.model.InputModel.IMFuncionarioLogin;
 import br.com.restaurante.restaurante.repository.FuncionarioRepository;
 
@@ -91,5 +92,13 @@ public class FuncionarioController {
         }
         return funcionario;
         
+    }
+
+
+    @CrossOrigin
+    @GetMapping("telefones/{id}")
+    List<Telefone> getTelefones(@PathVariable("id") Long id){
+        List<Telefone> telefones = funcionarioRepository.findById(id).get().getTelefone();
+        return telefones;
     }
 }

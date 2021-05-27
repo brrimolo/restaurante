@@ -184,15 +184,15 @@ GET http://localhost:8080/item/carrinho/remover/5 HTTP/1.1
 
 ###
 
-GET http://localhost:8080/endereco/ HTTP/1.1
+GET http://localhost:8080/endereco/75 HTTP/1.1
 
 ###
 POST http://localhost:8080/endereco/incluir HTTP/1.1
 content-type: application/json
 
 {
-    "logradouro": "Rua 123",
-    "numero": "98",
+    "logradouro": "Avenida Otoniel GOmes",
+    "numero": "1335",
     "complemento": "Travessa 18",
     "cidade": "Macaé",
     "uf": "AC",
