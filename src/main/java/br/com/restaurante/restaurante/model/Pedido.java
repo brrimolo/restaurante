@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Pedido {
@@ -21,6 +22,12 @@ public class Pedido {
     private Double valorTotal;
     @OneToMany
     private List<Item> itens;
+    @OneToOne
+    private Cliente cliente;
+    @OneToOne
+    private Funcionario funcionario;
+    @OneToOne
+    private Mesa mesa;
 
 
     

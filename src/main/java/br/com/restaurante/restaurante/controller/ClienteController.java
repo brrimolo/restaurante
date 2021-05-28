@@ -70,7 +70,7 @@ public class ClienteController {
     }
 
     @CrossOrigin
-    @GetMapping("/{id}")
+    @GetMapping("/excluir/{id}")
     public void excluirCliente(@PathVariable("id") Long id) throws Exception{
         var x = clienteRepo.findById(id);
 
@@ -82,5 +82,14 @@ public class ClienteController {
         }
     }
 
+    @CrossOrigin
+    @GetMapping("/{id}")
+    Cliente getCliente(@PathVariable("id") Long id){
+        var x = clienteRepo.findById(id);
+        if(x.isPresent()){
+            return x.get();
+        }
+        return null;
+    }
 
 }

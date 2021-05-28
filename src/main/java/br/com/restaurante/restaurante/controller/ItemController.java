@@ -172,6 +172,18 @@ public class ItemController {
         return valortotal;
     }
 
+
+    @CrossOrigin
+    @GetMapping("/carrinho/totalitens")
+    int getTotalItensCarrinho(){
+        int totalitens=0;
+        List<Integer> quantidade = carrinho.values().stream().collect(Collectors.toList());
+        for (int item : quantidade) {
+            totalitens+=item;
+        }
+        return totalitens;
+    }
+
     @CrossOrigin
     @GetMapping("/carrinho/limpar")
     public int limparCarrinho() {

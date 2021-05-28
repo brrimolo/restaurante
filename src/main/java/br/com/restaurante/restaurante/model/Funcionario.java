@@ -107,6 +107,9 @@ public class Funcionario {
     public void setTelefone(List<Telefone> telefone) {
         this.telefone = telefone;
     }
+    public void addTelefone(Telefone telefone) {
+        this.telefone.add(telefone);
+    }
 
     @Override
     public int hashCode() {

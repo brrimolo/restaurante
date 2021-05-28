@@ -40,7 +40,7 @@ content-type: application/json
 ###
 
 
-GET http://localhost:8080/cliente/ HTTP/1.1
+GET http://localhost:8080/cliente/14 HTTP/1.1
 
 ###
 POST http://localhost:8080/cliente/incluir HTTP/1.1
@@ -101,61 +101,48 @@ content-type: application/json
 GET http://localhost:8080/funcionario/ HTTP/1.1
 
 ###
-POST http://localhost:8080/funcionario/incluir HTTP/1.1
+PUT http://localhost:8080/funcionario/incluir/telefone/80 HTTP/1.1
 content-type: application/json
 
 {
-    "nome": "Paulo Antonio",
-    "cargo": "Garçom",
-    "login": "paulo",
-    "senha": "paulo123",
-    "gerente": "false",
-    "cpf": "3333333",
-    "email": "paulo@restauranteds1.com.br",
-    "endereco": {
-      "id": 1,
-      "logradouro": "Rua 123",
-      "numero": "98",
-      "complemento": "Travessa 18",
-      "bairro": {
+    "telefone": {
         "id": 1,
-        "nome": "Sao Jose Do Barreto",
-        "valorFrete": 11.5
-      },
-      "cidade": "Macaé",
-      "uf": "AC",
-      "cep": "2525536"
-    }
+        "ddd": "22",
+        "numero": "676567765"
+  }
+    
 
 }
 ###
-PUT http://localhost:8080/funcionario/alterar/68 HTTP/1.1
+PUT http://localhost:8080/funcionario/alterar/80 HTTP/1.1
 content-type: application/json
 
 {
-    "nome": "Andressa Soares",
-    "cargo": "Gerente de Atendimento",
-    "login": "andressa",
-    "senha": "andressa123",
+    "nome": "Paulo Antunes",
+    "cargo": "Garçom",
+    "login": "paulo",
+    "senha": "paulo123",
     "gerente": false,
-    "cpf": "12315125125",
+    "cpf": "28292929292",
     "endereco": {
-        "id": 1,
-        "logradouro": "Rua 123",
-        "numero": "98",
-        "complemento": "Travessa 18",
+        "id": 76,
+        "logradouro": "Avenida das Margaridas",
+        "numero": "299",
+        "complemento": "Casa 002",
         "bairro": {
-            "id": 1,
-            "nome": "Sao Jose Do Barreto",
-            "valorFrete": 11.5
+            "id": 3,
+            "nome": "Bairro da Glória",
+            "valorFrete": 16.5
         },
         "cidade": "Macaé",
-        "uf": "AC",
-        "cep": "2525536"
+        "uf": "RJ",
+        "cep": "29999923"
     },
-    "email": "andressa@ds1.com.br"
-
-    
+    "email": "paulo@ds1.com.br",
+    "telefone": {
+        "ddd": "23",
+        "numero": "8239923231"
+    }
 }
 
 ###
@@ -170,7 +157,7 @@ content-type: application/json
 
 ###
 
-GET http://localhost:8080/item/carrinho/valortotal HTTP/1.1
+GET http://localhost:8080/item/carrinho/totalitens HTTP/1.1
 
 ###
 
@@ -197,4 +184,20 @@ content-type: application/json
     "cidade": "Macaé",
     "uf": "AC",
     "cep": "2525536"
+}
+
+
+//---------------------------TELEFONES--------------------------
+
+###
+
+GET http://localhost:8080/telefone/ HTTP/1.1
+
+###
+POST http://localhost:8080/telefone/incluir HTTP/1.1
+content-type: application/json
+
+{
+    "ddd": "31",
+    "numero": "444444555"
 }

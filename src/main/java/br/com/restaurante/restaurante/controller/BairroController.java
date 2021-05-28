@@ -38,7 +38,7 @@ public class BairroController {
     }
 
     @CrossOrigin
-    @GetMapping("/{id}")
+    @PostMapping("/excluir/{id}")
     public void excluirBairro(@PathVariable("id") Long id) throws Exception{
         var x = bairroRepository.findById(id);
 

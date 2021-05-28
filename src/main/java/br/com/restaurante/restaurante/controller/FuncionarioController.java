@@ -41,7 +41,7 @@ public class FuncionarioController {
 
     
     @CrossOrigin
-    @PostMapping("/{id}")
+    @PostMapping("/excluir/{id}")
     public void excluirFuncionario(@PathVariable("id") Long id) throws Exception{
         var x = funcionarioRepository.findById(id);
 
@@ -52,6 +52,17 @@ public class FuncionarioController {
             throw new Exception("Funcionário não encontrado.");
         }
     }
+
+    @CrossOrigin
+    @GetMapping("/{id}")
+    Funcionario getFuncionario(@PathVariable("id") Long id){
+        var x = funcionarioRepository.findById(id);
+        if(x.isPresent()){
+            return x.get();
+        }
+        return null;
+    }
+
 
     @CrossOrigin
     @PutMapping("/alterar/{id}")
@@ -73,6 +84,33 @@ public class FuncionarioController {
         });
 
 
+    }
+
+    //Metodo em desenvolvimento
+    @CrossOrigin
+    @PutMapping("/incluir/telefone/{id}")
+    Funcionario adicionarTelefone(@PathVariable("id") Long id,@RequestBody Telefone telefone){
+        var x = funcionarioRepository.findById(id);
+        if(x.isPresent()){
+            Funcionario  func = x.get();
+            func.addTelefone(telefone);
+            return funcionarioRepository.findById(id).map(funcionario -> {
+            funcionario.setCargo(func.getCargo());
+            funcionario.setCpf(func.getCpf());
+            funcionario.setEmail(func.getEmail());
+            funcionario.setEndereco(func.getEndereco());
+            funcionario.setGerente(func.getGerente());
+            funcionario.setLogin(func.getLogin());
+            funcionario.setNome(func.getNome());
+            funcionario.setSenha(func.getSenha());
+            funcionario.setTelefone(func.getTelefone());
+            return funcionarioRepository.save(funcionario);
+            }).orElseGet(() -> {
+                func.setMatricula(id);
+                return funcionarioRepository.save(func);
+            });
+        }
+        return null;
     }
 
     
@@ -101,4 +139,8 @@ public class FuncionarioController {
         List<Telefone> telefones = funcionarioRepository.findById(id).get().getTelefone();
         return telefones;
     }
+
+
+
+
 }
