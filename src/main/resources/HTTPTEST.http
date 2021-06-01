@@ -73,6 +73,17 @@ content-type: application/json
 }
 
 ###
+
+PUT http://localhost:8080/bairro/alterar/5 HTTP/1.1
+content-type: application/json
+
+{
+    "nome": "Barreto",
+    "valorFrete": "1.50"
+
+    //alterar os campos aqui
+}
+###
 GET http://localhost:8080/endereco/ HTTP/1.1
 
 
@@ -101,7 +112,7 @@ content-type: application/json
 GET http://localhost:8080/funcionario/ HTTP/1.1
 
 ###
-PUT http://localhost:8080/funcionario/incluir/telefone/80 HTTP/1.1
+PUT http://localhost:8080/funcionario/incluir/telefone/2 HTTP/1.1
 content-type: application/json
 
 {
@@ -109,40 +120,25 @@ content-type: application/json
         "id": 1,
         "ddd": "22",
         "numero": "676567765"
-  }
+    }
     
 
 }
 ###
-PUT http://localhost:8080/funcionario/alterar/80 HTTP/1.1
+POST http://localhost:8080/funcionario/incluir HTTP/1.1
 content-type: application/json
 
 {
-    "nome": "Paulo Antunes",
+    "nome": "Pedro Souza Antunes",
     "cargo": "Garçom",
-    "login": "paulo",
-    "senha": "paulo123",
+    "login": "pedro",
+    "senha": "pedro123",
     "gerente": false,
     "cpf": "28292929292",
     "endereco": {
-        "id": 76,
-        "logradouro": "Avenida das Margaridas",
-        "numero": "299",
-        "complemento": "Casa 002",
-        "bairro": {
-            "id": 3,
-            "nome": "Bairro da Glória",
-            "valorFrete": 16.5
-        },
-        "cidade": "Macaé",
-        "uf": "RJ",
-        "cep": "29999923"
+        "id": 1
     },
-    "email": "paulo@ds1.com.br",
-    "telefone": {
-        "ddd": "23",
-        "numero": "8239923231"
-    }
+    "email": "paulo@ds1.com.br"
 }
 
 ###
@@ -171,7 +167,7 @@ GET http://localhost:8080/item/carrinho/remover/5 HTTP/1.1
 
 ###
 
-GET http://localhost:8080/endereco/75 HTTP/1.1
+GET http://localhost:8080/endereco/ HTTP/1.1
 
 ###
 POST http://localhost:8080/endereco/incluir HTTP/1.1

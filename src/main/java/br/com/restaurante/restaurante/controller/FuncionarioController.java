@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.restaurante.restaurante.model.Funcionario;
-import br.com.restaurante.restaurante.model.Telefone;
 import br.com.restaurante.restaurante.model.InputModel.IMFuncionarioLogin;
 import br.com.restaurante.restaurante.repository.FuncionarioRepository;
 
@@ -35,7 +34,7 @@ public class FuncionarioController {
     @CrossOrigin
     @PostMapping("/incluir")
     public Long incluirFuncionario(@RequestBody Funcionario funcionario){
-        funcionarioRepository.saveAndFlush(funcionario);
+        funcionarioRepository.save(funcionario);
         return funcionario.getMatricula();
     }
 
@@ -86,32 +85,6 @@ public class FuncionarioController {
 
     }
 
-    //Metodo em desenvolvimento
-    @CrossOrigin
-    @PutMapping("/incluir/telefone/{id}")
-    Funcionario adicionarTelefone(@PathVariable("id") Long id,@RequestBody Telefone telefone){
-        var x = funcionarioRepository.findById(id);
-        if(x.isPresent()){
-            Funcionario  func = x.get();
-            func.addTelefone(telefone);
-            return funcionarioRepository.findById(id).map(funcionario -> {
-            funcionario.setCargo(func.getCargo());
-            funcionario.setCpf(func.getCpf());
-            funcionario.setEmail(func.getEmail());
-            funcionario.setEndereco(func.getEndereco());
-            funcionario.setGerente(func.getGerente());
-            funcionario.setLogin(func.getLogin());
-            funcionario.setNome(func.getNome());
-            funcionario.setSenha(func.getSenha());
-            funcionario.setTelefone(func.getTelefone());
-            return funcionarioRepository.save(funcionario);
-            }).orElseGet(() -> {
-                func.setMatricula(id);
-                return funcionarioRepository.save(func);
-            });
-        }
-        return null;
-    }
 
     
     @CrossOrigin
@@ -131,16 +104,4 @@ public class FuncionarioController {
         return funcionario;
         
     }
-
-
-    @CrossOrigin
-    @GetMapping("telefones/{id}")
-    List<Telefone> getTelefones(@PathVariable("id") Long id){
-        List<Telefone> telefones = funcionarioRepository.findById(id).get().getTelefone();
-        return telefones;
-    }
-
-
-
-
 }
