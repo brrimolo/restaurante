@@ -1,12 +1,9 @@
 package br.com.restaurante.restaurante.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -24,9 +21,7 @@ public class Funcionario {
     @OneToOne
     private Endereco endereco;
     private String email;
-
-    @OneToMany
-    private List<Telefone> telefone;
+    private String telefone;
 
     public Long getMatricula() {
         return matricula;
@@ -100,13 +95,14 @@ public class Funcionario {
         this.email = email;
     }
 
-    public List<Telefone> getTelefone() {
+    public String getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(List<Telefone> telefone) {
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+  
 
     @Override
     public int hashCode() {

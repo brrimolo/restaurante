@@ -8,4 +8,6 @@ import br.com.restaurante.restaurante.model.Telefone;
 @Repository
 public interface TelefoneRepository extends JpaRepository<Telefone,Long> {
     
+
+
 }

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,7 +54,7 @@ public class ClienteController {
     }
 
     @CrossOrigin
-    @PutMapping("/alterar/{id}")
+    @PostMapping("/alterar/{id}")
     public ResponseEntity<String> alterarCliente(@PathVariable("id") Long id,@RequestBody Cliente cliente){
         clienteRepo.findById(id)
         .map(x -> {
@@ -71,7 +70,7 @@ public class ClienteController {
     }
 
     @CrossOrigin
-    @GetMapping("/{id}")
+    @GetMapping("/excluir/{id}")
     public void excluirCliente(@PathVariable("id") Long id) throws Exception{
         var x = clienteRepo.findById(id);
 
@@ -83,5 +82,14 @@ public class ClienteController {
         }
     }
 
+    @CrossOrigin
+    @GetMapping("/{id}")
+    Cliente getCliente(@PathVariable("id") Long id){
+        var x = clienteRepo.findById(id);
+        if(x.isPresent()){
+            return x.get();
+        }
+        return null;
+    }
 
 }

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -59,7 +58,7 @@ public class ItemController {
 
 
     @CrossOrigin
-    @PutMapping("/alterar/{id}")
+    @PostMapping("/alterar/{id}")
     public ResponseEntity<String> alterarItem(@PathVariable("id") Long id,@RequestBody Item item){
         itemRepository.findById(id)
         .map(x -> {
@@ -109,6 +108,33 @@ public class ItemController {
 
 
     @CrossOrigin
+    @GetMapping("/carrinho/remover/{id}")
+    public int carrinhoItensRemover(@PathVariable("id") Long id) throws Exception{
+        var item = itemRepository.findById(id);
+        if(item.isPresent()){
+            if(carrinho.containsKey(item.get())){
+                auxcarrinho = carrinho.get(item.get())-1;
+                carrinho.remove(item.get());
+                if(auxcarrinho<=0){
+                    return carrinho.size();
+                }else{
+                    carrinho.put(item.get(), auxcarrinho);
+                }
+                
+                return carrinho.size();
+
+            }else{
+                //carrinho.put(item.get(),1);
+                return carrinho.size();
+            }
+            
+        }else{
+            throw new Exception("Item não disponível.");
+        }
+    }
+
+
+    @CrossOrigin
     @GetMapping("/carrinho")
     public String[][] getCarrinho() {
         List<Item> itensdocarrinhoaux = carrinho.keySet().stream().collect(Collectors.toList());
@@ -127,6 +153,35 @@ public class ItemController {
 
         return itensdocarrinho;
 
+    }
+
+
+
+
+    @CrossOrigin
+    @GetMapping("/carrinho/valortotal")
+    public Double valorTotalCarrinho(){
+        Double valortotal=0.0;
+        List<Item> itensdocarrinhoaux = carrinho.keySet().stream().collect(Collectors.toList());
+        List<Integer> quantidade = carrinho.values().stream().collect(Collectors.toList());
+        int i=0;
+        for (Item item : itensdocarrinhoaux) {
+            valortotal=valortotal+item.getValor()*quantidade.get(i);
+            i++;        
+        }
+        return valortotal;
+    }
+
+
+    @CrossOrigin
+    @GetMapping("/carrinho/totalitens")
+    int getTotalItensCarrinho(){
+        int totalitens=0;
+        List<Integer> quantidade = carrinho.values().stream().collect(Collectors.toList());
+        for (int item : quantidade) {
+            totalitens+=item;
+        }
+        return totalitens;
     }
 
     @CrossOrigin

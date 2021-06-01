@@ -6,22 +6,41 @@ POST http://localhost:8080/item/incluir HTTP/1.1
 content-type: application/json
 
 {
-    "nome": "CocaCola",
+    "nome": "Guaraná",
     "tipoItem": 0,
-    "valor": 6.5,
-    "qtdRefeicao": 8,
-    "tempoPreparo": 2.9
+    "valor": 5.5,
+    "qtdRefeicao": 39,
+    "tempoPreparo": 1.0
 
     //alterar os campos aqui
 }
 
+###
+
+GET http://localhost:8080/item/1 HTTP/1.1
+
+
+###
+
+GET http://localhost:8080/item/alterar/38 HTTP/1.1
+content-type: application/json
+
+{
+    "nome": "Coca-Cola",
+    "tipoItem": 3,
+    "valor": 6.5,
+    "qtdRefeicao": 20,
+    "tempoPreparo": 1.0
+
+    //alterar os campos aqui
+}
 
 
 //------------CLIENTES----------------------
 ###
 
 
-GET http://localhost:8080/cliente/ HTTP/1.1
+GET http://localhost:8080/cliente/14 HTTP/1.1
 
 ###
 POST http://localhost:8080/cliente/incluir HTTP/1.1
@@ -39,7 +58,7 @@ content-type: application/json
 
 
 ###
-GET http://localhost:8080/bairro// HTTP/1.1
+GET http://localhost:8080/bairro/ HTTP/1.1
 
 ###
 
@@ -54,16 +73,34 @@ content-type: application/json
 }
 
 ###
-GET http://localhost:8080/bairro/5 HTTP/1.1
 
-
-###
-PUT  http://localhost:8080/bairro/alterar/6 HTTP/1.1
+PUT http://localhost:8080/bairro/alterar/5 HTTP/1.1
 content-type: application/json
 
 {
-    "nome": "Sao Jose Do Barreto",
-    "valorFrete": "11.50"
+    "nome": "Barreto",
+    "valorFrete": "1.50"
+
+    //alterar os campos aqui
+}
+###
+GET http://localhost:8080/endereco/ HTTP/1.1
+
+
+###
+POST  http://localhost:8080/endereco/incluir HTTP/1.1
+content-type: application/json
+
+{
+    "logradouro": "Rua dos Jessuitasdsdsdsdsds",
+    "numero": "16",
+    "complemento": "Condominio Mar do Norte",
+    "cidade": "Macae",
+    "cep": "384834",
+    "uf": "RJ",
+    "bairro": {
+        "id": "1"
+    }
 
     //alterar os campos aqui
 }
@@ -75,18 +112,33 @@ content-type: application/json
 GET http://localhost:8080/funcionario/ HTTP/1.1
 
 ###
+PUT http://localhost:8080/funcionario/incluir/telefone/2 HTTP/1.1
+content-type: application/json
+
+{
+    "telefone": {
+        "id": 1,
+        "ddd": "22",
+        "numero": "676567765"
+    }
+    
+
+}
+###
 POST http://localhost:8080/funcionario/incluir HTTP/1.1
 content-type: application/json
 
 {
-    "nome": "Carlos",
+    "nome": "Pedro Souza Antunes",
     "cargo": "Garçom",
-    "login": "carlos",
-    "senha": "carlos123",
-    "gerente": "false",
-    "cpf": "222222222",
-    "email": "carlos@restauranteds1.com.br"
-
+    "login": "pedro",
+    "senha": "pedro123",
+    "gerente": false,
+    "cpf": "28292929292",
+    "endereco": {
+        "id": 1
+    },
+    "email": "paulo@ds1.com.br"
 }
 
 ###
@@ -101,10 +153,47 @@ content-type: application/json
 
 ###
 
-GET http://localhost:8080/item/carrinho/add/2 HTTP/1.1
+GET http://localhost:8080/item/carrinho/totalitens HTTP/1.1
 
 ###
 
-GET http://localhost:8080/item/carrinho HTTP/1.1
+GET http://localhost:8080/item/carrinho/remover/5 HTTP/1.1
 
 ###
+
+
+
+//---------------------------ENDEREÇO--------------------------
+
+###
+
+GET http://localhost:8080/endereco/ HTTP/1.1
+
+###
+POST http://localhost:8080/endereco/incluir HTTP/1.1
+content-type: application/json
+
+{
+    "logradouro": "Avenida Otoniel GOmes",
+    "numero": "1335",
+    "complemento": "Travessa 18",
+    "cidade": "Macaé",
+    "uf": "AC",
+    "cep": "2525536"
+}
+
+
+//---------------------------TELEFONES--------------------------
+
+###
+
+GET http://localhost:8080/telefone/ HTTP/1.1
+
+###
+POST http://localhost:8080/telefone/incluir HTTP/1.1
+content-type: application/json
+
+{
+    "ddd": "31",
+    "numero": "444444555"
+}

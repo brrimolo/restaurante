@@ -2,7 +2,6 @@ package br.com.restaurante.restaurante.controller;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,13 +33,14 @@ public class FuncionarioController {
 
     @CrossOrigin
     @PostMapping("/incluir")
-    public void incluirFuncionario(@RequestBody Funcionario funcionario){
-        funcionarioRepository.saveAndFlush(funcionario);
+    public Long incluirFuncionario(@RequestBody Funcionario funcionario){
+        funcionarioRepository.save(funcionario);
+        return funcionario.getMatricula();
     }
 
     
     @CrossOrigin
-    @GetMapping("/{id}")
+    @PostMapping("/excluir/{id}")
     public void excluirFuncionario(@PathVariable("id") Long id) throws Exception{
         var x = funcionarioRepository.findById(id);
 
@@ -53,25 +53,38 @@ public class FuncionarioController {
     }
 
     @CrossOrigin
-    @PutMapping("/alterar/{id}")
-    public ResponseEntity<String> alterarFuncionario(@PathVariable("id") Long id,@RequestBody Funcionario func){
-        funcionarioRepository.findById(id)
-        .map(x -> {
-            x.setCargo(func.getCargo());
-            x.setCpf(func.getCpf());
-            x.setEmail(func.getEmail());
-            x.setEndereco(func.getEndereco());
-            x.setGerente(func.getGerente());
-            x.setLogin(func.getLogin());
-            x.setSenha(func.getSenha());
-            x.setNome(func.getNome());
-            x.setTelefone(func.getTelefone());
-            x.setMatricula(func.getMatricula());
-            Funcionario funcatualizado = funcionarioRepository.save(x);
-            return ResponseEntity.ok().body(funcatualizado);
-        }).orElse(ResponseEntity.notFound().build());
+    @GetMapping("/{id}")
+    Funcionario getFuncionario(@PathVariable("id") Long id){
+        var x = funcionarioRepository.findById(id);
+        if(x.isPresent()){
+            return x.get();
+        }
         return null;
     }
+
+
+    @CrossOrigin
+    @PutMapping("/alterar/{id}")
+    Funcionario alterarFuncionario(@PathVariable("id") Long id,@RequestBody Funcionario func){
+        
+        return funcionarioRepository.findById(id).map(funcionario -> {
+            funcionario.setCargo(func.getCargo());
+            funcionario.setCpf(func.getCpf());
+            funcionario.setEmail(func.getEmail());
+            funcionario.setEndereco(func.getEndereco());
+            funcionario.setGerente(func.getGerente());
+            funcionario.setLogin(func.getLogin());
+            funcionario.setNome(func.getNome());
+            funcionario.setSenha(func.getSenha());
+            return funcionarioRepository.save(funcionario);
+        }).orElseGet(() -> {
+            func.setMatricula(id);
+            return funcionarioRepository.save(func);
+        });
+
+
+    }
+
 
     
     @CrossOrigin

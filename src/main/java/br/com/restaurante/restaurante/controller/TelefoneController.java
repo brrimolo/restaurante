@@ -32,8 +32,9 @@ public class TelefoneController {
 
     @CrossOrigin
     @PostMapping("/incluir")
-    public void incluirTelefone(@RequestBody Telefone telefone){
+    Long incluirTelefone(@RequestBody Telefone telefone){
         telefoneRepository.save(telefone);
+        return telefone.getId();
     }
 
     @CrossOrigin
@@ -61,4 +62,7 @@ public class TelefoneController {
         }).orElse(ResponseEntity.notFound().build());
         return null;
     }
+
+
+
 }
