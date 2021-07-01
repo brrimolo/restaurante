@@ -112,15 +112,12 @@ content-type: application/json
 GET http://localhost:8080/funcionario/ HTTP/1.1
 
 ###
-PUT http://localhost:8080/funcionario/incluir/telefone/2 HTTP/1.1
+POST http://localhost:8080/reserva/alterar/2 HTTP/1.1
 content-type: application/json
 
 {
-    "telefone": {
-        "id": 1,
-        "ddd": "22",
-        "numero": "676567765"
-    }
+    "status": "Confirmado"
+}
     
 
 }
