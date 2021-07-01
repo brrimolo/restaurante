@@ -1,5 +1,6 @@
 package br.com.restaurante.restaurante.controller;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.restaurante.restaurante.enums.TipoItem;
+import br.com.restaurante.restaurante.model.Funcionario;
 import br.com.restaurante.restaurante.model.Item;
+import br.com.restaurante.restaurante.model.Pedido;
+import br.com.restaurante.restaurante.repository.FuncionarioRepository;
 import br.com.restaurante.restaurante.repository.ItemRepository;
 
 
@@ -23,11 +27,15 @@ import br.com.restaurante.restaurante.repository.ItemRepository;
 @RequestMapping("/item")
 public class ItemController {
     private final ItemRepository itemRepository;
+    private final FuncionarioRepository funcionarioRepository;
+    private final PedidoController pedidoController;
     public Map<Item,Integer> carrinho = new HashMap<>();
     public int auxcarrinho;
 
-    public ItemController(ItemRepository itemRepository){
+    public ItemController(ItemRepository itemRepository,FuncionarioRepository funcionarioRepository, PedidoController pedidoController){
         this.itemRepository=itemRepository;
+        this.funcionarioRepository =funcionarioRepository;
+        this.pedidoController = pedidoController;
     }
 
     @CrossOrigin
@@ -155,7 +163,40 @@ public class ItemController {
 
     }
 
+    @CrossOrigin
+    @PostMapping("/confirmar/{idFuncionario}")
+    public void confirmarPedido(@PathVariable("idFuncionario") Long idFuncionario){
+        System.out.println(idFuncionario);
+        if(carrinho.size() >0){
+            try{
+                
+                //Cliente cliente = clienteRepository.findById(idCliente).get();
+                Funcionario funcionario = funcionarioRepository.findById(idFuncionario).get();
 
+                Pedido pedido = new Pedido();
+                pedido.setDataHoraPedido(LocalDate.now());
+                pedido.setDelivery(false);
+                //pedido.setCliente(cliente);
+                pedido.setFuncionario(funcionario);
+                Double valortotal=0.0;
+                List<Item> itens = carrinho.keySet().stream().collect(Collectors.toList());
+                List<Integer> quantidade = carrinho.values().stream().collect(Collectors.toList());
+                int i=0;
+                for (Item item : itens) {
+                    valortotal=valortotal+item.getValor()*quantidade.get(i);
+                    i++;        
+                }
+                pedido.setValorTotal(valortotal);
+                pedido.setPrevisaoEntrega(LocalDate.now());
+                pedido.setItens(itens);
+                pedidoController.incluirPedido(pedido);
+            }catch(Exception e){
+            }
+        }else{
+           
+        }
+
+    }
 
 
     @CrossOrigin

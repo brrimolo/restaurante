@@ -197,3 +197,39 @@ content-type: application/json
     "ddd": "31",
     "numero": "444444555"
 }
+
+
+
+//---------------------------PEDIDOS--------------------------
+
+###
+
+GET http://localhost:8080/pedido/ HTTP/1.1
+
+###
+POST http://localhost:8080/pedido/incluir HTTP/1.1
+content-type: application/json
+
+{
+    "valorTotal": "390",
+    "itens": [
+        {
+            "id": "2",
+            "nome": "CocaCola",
+            "tipoItem": "NaoAlcoolica",
+            "valor": "8.6",
+            "qtdRefeicao": "50",
+            "tempoPreparo": "5.0"
+        },
+        {
+            "id": "3",
+            "nome": "Heineken",
+            "tipoItem": "Alcoolica",
+            "valor": "12.0",
+            "qtdRefeicao": "50",
+            "tempoPreparo": "5.0"
+        }
+    ]
+    
+
+}
