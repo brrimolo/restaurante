@@ -19,9 +19,11 @@ import br.com.restaurante.restaurante.repository.PedidoRepository;
 @RequestMapping("/pedido")
 public class PedidoController {
     private final PedidoRepository pedidoRepository;
+    //private final ItemRepository itemRepository;
 
     public PedidoController(PedidoRepository pedidoRepository){
         this.pedidoRepository=pedidoRepository;
+        //this.itemRepository=itemRepository;
     }
 
     @CrossOrigin

@@ -7,8 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+
 
 @Entity
 public class Pedido {
@@ -20,7 +21,7 @@ public class Pedido {
     private LocalDate previsaoEntrega;
     private Boolean delivery;
     private Double valorTotal;
-    @OneToMany
+    @ManyToMany
     private List<Item> itens;
     @OneToOne
     private Cliente cliente;
@@ -34,6 +35,30 @@ public class Pedido {
     //#region *** Getters and Setters ***
     public Long getId() {
         return id;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public Mesa getMesa() {
+        return mesa;
+    }
+
+    public void setMesa(Mesa mesa) {
+        this.mesa = mesa;
     }
 
     public void setId(Long id) {

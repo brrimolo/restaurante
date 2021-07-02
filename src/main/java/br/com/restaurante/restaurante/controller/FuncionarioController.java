@@ -75,6 +75,7 @@ public class FuncionarioController {
             funcionario.setGerente(func.getGerente());
             funcionario.setLogin(func.getLogin());
             funcionario.setNome(func.getNome());
+            funcionario.setTelefone(func.getTelefone());
             funcionario.setSenha(func.getSenha());
             return funcionarioRepository.save(funcionario);
         }).orElseGet(() -> {

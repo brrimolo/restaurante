@@ -1,11 +1,12 @@
 package br.com.restaurante.restaurante.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Reserva {
@@ -13,8 +14,57 @@ public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate dataHoraReserva;
-    private LocalDate expiracaoReserva;
+    private LocalDateTime dataHoraReserva;
+    private LocalDateTime expiracaoReserva;
+    private String nomeUsuario;
+    private String telefone;
+    private String qtdLugares;
+    
+    @OneToOne
+    private Mesa mesa;
+
+    private String status;
+
+    public String getNomeUsuario() {
+        return nomeUsuario;
+    }
+
+    public void setNomeUsuario(String nomeUsuario) {
+        this.nomeUsuario = nomeUsuario;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getQtdLugares() {
+        return qtdLugares;
+    }
+
+    public void setQtdLugares(String qtdLugares) {
+        this.qtdLugares = qtdLugares;
+    }
+
+
+    public Mesa getMesa() {
+        return mesa;
+    }
+
+    public void setMesa(Mesa mesa) {
+        this.mesa = mesa;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     //#region *** Getters and Setters ***
     public Long getId() {
@@ -25,19 +75,19 @@ public class Reserva {
         this.id = id;
     }
 
-    public LocalDate getDataHoraReserva() {
+    public LocalDateTime getDataHoraReserva() {
         return dataHoraReserva;
     }
 
-    public void setDataHoraReserva(LocalDate dataHoraReserva) {
+    public void setDataHoraReserva(LocalDateTime dataHoraReserva) {
         this.dataHoraReserva = dataHoraReserva;
     }
 
-    public LocalDate getExpiracaoReserva() {
+    public LocalDateTime getExpiracaoReserva() {
         return expiracaoReserva;
     }
 
-    public void setExpiracaoReserva(LocalDate expiracaoReserva) {
+    public void setExpiracaoReserva(LocalDateTime expiracaoReserva) {
         this.expiracaoReserva = expiracaoReserva;
     }
     //#endregion
